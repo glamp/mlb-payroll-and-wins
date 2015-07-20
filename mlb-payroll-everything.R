@@ -2,21 +2,18 @@ library(plyr)
 library(ggplot2)
 library(ggthemes)
 
-load('../28/attendance2.Rdata')
-load('../28/standings2.Rdata')
-
-df <- read.csv("~/Downloads/mlb-standings-and-payroll.csv", stringsAsFactors=FALSE)
+df <- read.csv("./mlb-standings-and-payroll.csv", stringsAsFactors=FALSE)
 df <- df[,c("tm", "year", "w", "wins_losses", "est_payroll")]
 df <- df[df$year >= 1985,]
 head(df)
 
 # Lookup metadata for each team
-team.lookups <- read.csv("~/Downloads/team-lookups.csv")
+team.lookups <- read.csv("./team-lookups.csv")
 df <- merge(df, team.lookups, by.x="tm", by.y="historic_team", stringsAsFactors=FALSE)
 head(df)
 
 # Lookup colors
-team.colors <- read.csv("~/Downloads/team-colors.csv", stringsAsFactors=FALSE)
+team.colors <- read.csv("./team-colors.csv", stringsAsFactors=FALSE)
 df <- merge(df, team.colors, by.x="modern_team", by.y="tm")
 head(df)
 
